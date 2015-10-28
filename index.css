@@ -1,0 +1,38 @@
+body {
+  background-color: #000000;
+  font-family: courier, monospace;
+}
+#header {
+  display: inline-block;
+}
+#header h1 {
+  color: #67f868;
+  font-size: 4em;
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+#header h2 {
+  color: #E1E1DD;
+  font-size: 1.5em;
+  margin-top: 0em;
+  margin-bottom: 0.5em;
+  display: inline;
+}
+a:link {
+  color: #6a76fc;
+  }
+a:visited {
+  color: #6a76fc;
+}
+a:hover {
+  color: #BD7218;
+  text-decoration: underline;
+}
+
+@media (max-device-width: 667px) {
+  /* Mobile stuff goes here */
+  body {
+    font-size: 1.5em;
+  }
+}
+
