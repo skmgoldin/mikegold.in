@@ -1,4 +1,5 @@
 var lastCommitDateString;
+var oAuth = "?access_token=602efd22f1647b9a105dcdef4e674f34419cf288";
 
 var header = {
   "Accept": "application/vnd.github.v3+json"
@@ -20,7 +21,7 @@ var req = {
 
     var commitsInPush = pushObj.payload.commits.length;
     var commitUrl = pushObj.payload.commits[commitsInPush - 1].url;
-    jQuery.ajax(commitUrl, {
+    jQuery.ajax(commitUrl + oAuth, {
       headers: header,
       success: function(data, textStatus, jqXHR) {
         lastCommitDateString = new Date(data.commit.author.date);
@@ -32,6 +33,6 @@ var req = {
 };
 
 jQuery(document).ready(function() {
-  jQuery.ajax("http://api.github.com/users/skmgoldin/events/public", req);
+  jQuery.ajax("https://api.github.com/users/skmgoldin/events" + oAuth, req);
 });
 
