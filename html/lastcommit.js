@@ -26,13 +26,14 @@ var req = {
       success: function(data, textStatus, jqXHR) {
         lastCommitDateString = new Date(data.commit.author.date);
         lastCommitDateString = lastCommitDateString.toLocaleDateString();
-        document.getElementById("lastcommit").innerHTML = lastCommitDateString;
+
+        jQuery(document).ready(function() {
+          document.getElementById("lastcommit").innerHTML = lastCommitDateString;
+        });
       }
     });
   }
 };
 
-jQuery(document).ready(function() {
-  jQuery.ajax("https://api.github.com/users/skmgoldin/events" + oAuth, req);
-});
+jQuery.ajax("https://api.github.com/users/skmgoldin/events" + oAuth, req);
 
