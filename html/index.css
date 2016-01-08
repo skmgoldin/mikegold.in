@@ -4,6 +4,7 @@ body {
 }
 #header {
   display: inline-block;
+  margin-bottom: 20px;
 }
 #header h1 {
   color: #67f868;
@@ -16,6 +17,17 @@ body {
   font-size: 1.5em;
   margin-top: 0em;
   margin-bottom: 0.5em;
+  display: inline;
+}
+#blogpost {
+  color: #E1E1DD;
+  font-size: 1em;
+  display: inline;
+}
+#blogpost h1 {
+  color: #BD7218;
+  font-size: 1.5em;
+  margin-bottom: 1em;
   display: inline;
 }
 a:link {
