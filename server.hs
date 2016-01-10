@@ -27,18 +27,22 @@ handleConnection listenPort =
 
     procRequest logLock connSock clientAddr =
       do
-        logHandler logLock clientAddr "client connected"
+        withMVar logLock (\a -> putStrLn ((show clientAddr) ++ " connected.")
+                                >> return a)
+
         -- I'm going to assume anybody sending me a request greater than 4K in
         -- size is trolling for now, but this is a BUG.
         req <- recv connSock 4096
         httpHandler req connSock
 
-        mapM_ (logHandler logLock clientAddr) (lines req)
+        logHandler logLock clientAddr req
 	close connSock
-        logHandler logLock clientAddr "client disconnected"
+        withMVar logLock (\a -> putStrLn ((show clientAddr) ++ " disconnected.")
+                                >> return a)
 
 logHandler logLock addr msg =
-  withMVar logLock (\a -> putStrLn ("From " ++ show addr ++ ": " ++ msg)
+  withMVar logLock (\a -> putStrLn ("From " ++ show addr ++ ":")
+                          >> putStrLn msg
                           >> return a)
   
 httpHandler req connSock =
