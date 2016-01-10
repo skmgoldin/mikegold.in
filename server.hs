@@ -48,6 +48,7 @@ httpHandler req connSock =
     reqFile <- openFile reqUrl ReadMode
     dataString <- hGetContents reqFile
     send connSock dataString
+    hClose reqFile
   where
     getReqUrl req = 
       foldl (\x y -> if (head y) == '/' then y else x) "" (words req)
