@@ -16,37 +16,31 @@ handleConnection listenPort =
     lSock <- socket (addrFamily servaddr) Stream defaultProtocol
     bind lSock (addrAddress servaddr)
     listen lSock 5
-    -- We'll use this lock to sync access to our handlers
-    lock <- newMVar ()
-    threadRequests lock lSock
+    logLock <- newMVar ()
+    threadRequests logLock lSock
   where
-    -- Listen-loop. Spin here forever.
-    threadRequests lock lSock =
+    threadRequests logLock lSock =
       do
-        -- connSock is the socket we should serve over, reserve lSock for
-        -- listening for and accepting new connections.
         (connSock, clientAddr) <- accept lSock  
-        forkIO $ procRequest lock connSock clientAddr
-        threadRequests lock lSock
+        forkIO $ procRequest logLock connSock clientAddr
+        threadRequests logLock lSock
 
-    procRequest lock connSock clientAddr =
+    procRequest logLock connSock clientAddr =
       do
-        logHandler clientAddr "client connected"
+        logHandler logLock clientAddr "client connected"
         -- I'm going to assume anybody sending me a request greater than 4K in
-        -- size is trolling for now, but this is a BUG. Do I need to lock?
+        -- size is trolling for now, but this is a BUG.
         req <- recv connSock 4096
         httpHandler req connSock
 
-        mapM_ (handle logHandler lock clientAddr) (lines req)
+        mapM_ (logHandler logLock clientAddr) (lines req)
 	close connSock
-        handle logHandler lock clientAddr "client disconnected"
+        logHandler logLock clientAddr "client disconnected"
 
-    handle handler lock clientAddr msg =
-      withMVar lock (\a -> handler clientAddr msg >> return a)
-
-logHandler addr msg =
-  putStrLn $ "From " ++ show addr ++ ": " ++ msg
-
+logHandler logLock addr msg =
+  withMVar logLock (\a -> putStrLn ("From " ++ show addr ++ ": " ++ msg)
+                          >> return a)
+  
 httpHandler req connSock =
   do
     let reqUrl = if (getReqUrl req) == "/" then "html/index.html"
