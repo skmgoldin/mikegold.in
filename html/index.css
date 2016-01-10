@@ -19,6 +19,11 @@ body {
   margin-bottom: 0.5em;
   display: inline;
 }
+#footer {
+  color: #E1E1DD;
+  position: absolute;
+  bottom: 0;
+}
 #blogpost {
   color: #E1E1DD;
   font-size: 1em;
