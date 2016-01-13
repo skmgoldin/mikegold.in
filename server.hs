@@ -51,11 +51,22 @@ httpHandler req connSock =
                                            else "html/" ++ (getReqUrl req)
     reqFile <- openFile reqUrl ReadMode
     dataString <- hGetContents reqFile
-    send connSock dataString
+    sendMsg dataString connSock
     hClose reqFile
   where
     getReqUrl req = 
       foldl (\x y -> if (head y) == '/' then y else x) "" (words req)
+
+    sendMsg dataString connSock =
+      if (length dataString) /= 0
+      then
+        do
+          let (sendChunk, remain) = splitAt 4096 dataString
+          bytesSent <- send connSock sendChunk
+          putStrLn $ "BYTES SENT: " ++ (show bytesSent) 
+          sendMsg ((drop bytesSent sendChunk) ++ remain) connSock
+        else
+          return 0
 
 main =
   let port = "80" in
