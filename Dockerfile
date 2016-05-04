@@ -10,3 +10,4 @@ RUN curl -o go-ipfs.tar.gz http://dist.ipfs.io/go-ipfs/v0.4.0/go-ipfs_v0.4.0_lin
 RUN tar xvfz go-ipfs.tar.gz 
 RUN mv go-ipfs/ipfs /usr/local/bin/ipfs
 RUN ipfs init
+RUN ipfs config "Addresses.Gateway" "/ip4/0.0.0.0/tcp/8080"
