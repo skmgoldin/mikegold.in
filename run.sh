@@ -3,4 +3,6 @@
 cd /mikegold.in
 git pull
 ghc server.hs
-./server > server.log
+ipfs init
+nohup ipfs daemon &
+nohup ./server > server.log &
