@@ -1,3 +1,3 @@
 git pull
 ghc server.hs
-nohup ./server > server.log &
+./server > server.log
