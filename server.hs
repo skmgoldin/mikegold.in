@@ -47,8 +47,8 @@ logHandler logLock addr msg =
   
 httpHandler req connSock =
   do
-    let reqUrl = if (getReqUrl req) == "/" then "html/index.html"
-                                           else "html/" ++ (getReqUrl req)
+    let reqUrl = if (getReqUrl req) == "/" then "./html/index.html"
+                                           else "./html/" ++ (getReqUrl req)
     reqFile <- openFile reqUrl ReadMode
     dataString <- hGetContents reqFile
     sendMsg dataString connSock
