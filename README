@@ -1,0 +1,3 @@
+1. Install Docker.
+2. docker build -t mikegold.in .
+3. docker run mikegold.in /mikegold.in/server
