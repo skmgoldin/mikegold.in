@@ -1,3 +1,3 @@
 1. Install Docker.
 2. docker build -t mikegold.in .
-3. docker run mikegold.in /mikegold.in/server
+3. docker run -d -p 80:80 -p 8080:8080 mikegold.in /mikegold.in/run.sh
