@@ -19,6 +19,9 @@ body {
   margin-bottom: 0.5em;
   display: inline;
 }
+#main {
+  color: #E1E1DD;
+}
 #footer {
   color: #E1E1DD;
   position: absolute;
