@@ -13,11 +13,12 @@ RUN tar xvfz go-ipfs.tar.gz
 RUN mv go-ipfs/ipfs /usr/local/bin/ipfs
 RUN rm -rf go-ipfs go-ipfs.tar.gz
 
+# IPFS 0.4.2 breaks the docker build, stick to 0.4.1
 RUN wget -r https://dist.ipfs.io/ipfs-update/v1.3.0/ipfs-update_v1.3.0_linux-amd64.tar.gz
 RUN tar xvfz dist.ipfs.io/ipfs-update/v1.3.0/ipfs-update_v1.3.0_linux-amd64.tar.gz
 RUN mv /ipfs-update/ipfs-update /usr/local/bin
 RUN rm -rf ipfs-update dist.ipfs.io
-RUN ipfs-update install $(ipfs-update versions | sed -e '$!d')
+RUN ipfs-update install v0.4.1
 
 RUN ipfs init
 RUN ipfs config "Addresses.Gateway" "/ip4/0.0.0.0/tcp/8080"
