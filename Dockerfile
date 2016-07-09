@@ -24,3 +24,5 @@ RUN apt-get update && apt-get upgrade -y \
 # Initialize and configure IPFS
 && ipfs init \
 && ipfs config "Addresses.Gateway" "/ip4/0.0.0.0/tcp/8080"
+
+# TODO: Purge unneeded packages
