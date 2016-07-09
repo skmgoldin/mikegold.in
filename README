@@ -1,2 +1,2 @@
 1. Install Docker.
-2. ./rebuild.sh
+2. python deploy.py prod

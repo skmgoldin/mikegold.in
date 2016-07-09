@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER Mike Goldin <skmgoldin@gmail.com>
 # Install essentials
 RUN apt-get update && apt-get upgrade -y \
-&& apt-get install -y git man vim ghc cabal-install curl wget \
+&& apt-get install -y git man vim ghc cabal-install curl wget python \
 # Install cabal dependencies
 && cabal update \
 && cabal install Network \
