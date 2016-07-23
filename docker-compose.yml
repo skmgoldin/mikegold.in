@@ -1,0 +1,12 @@
+version: '2'
+services:
+    site:
+        build: ./site/
+        ports:
+            - "80:80"
+        depends_on:
+            - ipfs
+    ipfs:
+        image: ipfs/go-ipfs
+        ports:
+            - "8080:8080"

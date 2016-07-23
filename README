@@ -1,2 +1,5 @@
-1. Install Docker.
-2. python deploy.py prod
+```
+Install Docker.
+docker-compose up --build
+```
+
