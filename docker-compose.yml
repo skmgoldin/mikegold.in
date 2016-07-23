@@ -1,11 +1,11 @@
 version: '2'
 services:
     site:
-        build: ./site/
+        image: nginx
         ports:
             - "80:80"
-        depends_on:
-            - ipfs
+        volumes:
+            - ./html/:/usr/share/nginx/html:ro
     ipfs:
         image: ipfs/go-ipfs
         ports:
