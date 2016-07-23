@@ -1,11 +1,9 @@
 version: '2'
 services:
     site:
-        image: nginx
+        build: .
         ports:
             - "80:80"
-        volumes:
-            - ./html/:/usr/share/nginx/html:ro
     ipfs:
         image: ipfs/go-ipfs
         ports:
