@@ -1,2 +1,5 @@
-1. Install Docker
-2. sudo nohup docker-compose up --build > app.log &
+```
+sudo ./devops/pave-ubuntu1604.sh
+cd app && sudo docker build -t hc .
+sudo nohup docker run -p 80:80 hc > app.log &
+```
