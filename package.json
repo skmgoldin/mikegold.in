@@ -5,6 +5,6 @@
   "dependencies": {},
   "scripts": {
     "start": "node app.js",
-    "zip": "zip ../hiddencomputer.zip -r * .[^.]*"
+    "zip": "zip hiddencomputer.zip -r * .[^.]*"
   }
 }
