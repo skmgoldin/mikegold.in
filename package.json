@@ -2,7 +2,9 @@
   "name": "hidden-computer",
   "version": "0.0.1",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "express": "4.15.4"
+  },
   "scripts": {
     "start": "node app.js",
     "zip": "zip hiddencomputer.zip -r * .[^.]*"
