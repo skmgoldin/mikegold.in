@@ -28,12 +28,12 @@ const findPushEvent = function (activity) {
   let foundPush = false;
   let i = 0;
   let pushEvent = null;
-  while (foundPush == false && i < activity.length) {
-    if (activity[i].type == 'PushEvent') {
+  while (foundPush === false && i < activity.length) {
+    if (activity[i].type === 'PushEvent') {
       foundPush = true;
       pushEvent = activity[i];
     }
-    i++;
+    i += 1;
   }
   return pushEvent;
 };
