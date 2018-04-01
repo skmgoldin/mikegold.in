@@ -5,8 +5,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use((req, res, next) => {
-  if ((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https')) {
-    res.redirect(`https://${req.get('Host')}${req.url}`);
+  if (process.env.PORT) { // Do not require https on a dev box
+    if ((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https')) {
+      res.redirect(`https://${req.get('Host')}${req.url}`);
+    } else { next(); }
   } else { next(); }
 });
 app.use(express.static('public'));
