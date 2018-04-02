@@ -11,6 +11,8 @@ app.use((req, res, next) => {
     } else { next(); }
   } else { next(); }
 });
+
+app.use('/scripts', express.static(__dirname + '/node_modules/'));
 app.use(express.static('public'));
 
 app.listen(port, () => {
