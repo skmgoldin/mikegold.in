@@ -1,4 +1,5 @@
 const express = require('express');
+const lastCommit = require('./lastcommit.js');
 
 const app = express();
 
@@ -12,7 +13,12 @@ app.use((req, res, next) => {
   } else { next(); }
 });
 
-app.use('/scripts', express.static(__dirname + '/node_modules/'));
+app.get('/lastCommit', async (req, res) => {
+  const renderedCommit = await lastCommit.lastCommit();
+  res.send(renderedCommit);
+});
+
+app.use('/scripts', express.static(`${__dirname}/node_modules/`));
 app.use(express.static('public'));
 
 app.listen(port, () => {

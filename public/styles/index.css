@@ -29,6 +29,13 @@ body {
   margin-bottom: 0.5em;
   display: inline;
 }
+#nav h1 {
+  color: #E1E1DD;
+  font-size: 1.5em;
+  margin-top: 0em;
+  margin-bottom: 0.5em;
+  display: inline;
+}
 #footer {
   color: #E1E1DD;
   position: absolute;

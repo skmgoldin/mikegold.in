@@ -4,7 +4,6 @@
   <link type="text/css" rel="stylesheet" href="styles/index.css" media="all"/>
   <link rel="icon" href="favicon.ico?v=2"/>
   <script src="scripts/jquery/dist/jquery.min.js"></script>
-  <script src="js/lastcommit.js"></script>
 </head>
 
 <body>
@@ -16,9 +15,29 @@
         <h2>software developer in New York City</h2>
     </div>
     <div>
-        <h2>last commit pushed to <a href="http://www.github.com/skmgoldin">GitHub</a>: </h2><h2 id=lastcommit></h2><h2></h2>
+        <h2>last commit pushed to <a href="http://www.github.com/skmgoldin">GitHub</a>: </h2><h2 id="lastCommit"></h2><h2></h2>
     </div>
   </div>
+  <div id="nav">
+    <div>
+        <h1><a href="code.html">Code</a></h1>
+        <h1><a href="papers.html">Papers</a></h1>
+        <h1><a href="about.html">About</a></h1>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    const req = {
+      success(data, textStatus, jqXHR) {
+        document.getElementById('lastCommit').innerHTML += data;
+      },
+    };
+
+    const origin = location.protocol + '//' + location.hostname +
+      (location.port ? ':'+location.port: '');
+    $.ajax(origin + '/lastCommit', req);
+  </script>
+
   <div id="main">
     <div>
       <div id="about">
