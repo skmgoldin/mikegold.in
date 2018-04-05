@@ -15,8 +15,6 @@ const renderLastCommitHTML = (commit) => {
   return lastCommitHTML;
 };
 
-const getLastCommitObj = async commitUrl => (await axios.get(commitUrl + oAuth, header)).data;
-
 const findPushEvent = (activity) => {
   let foundPush = false;
   let i = 0;
@@ -41,14 +39,10 @@ exports.lastCommit = async () => {
   // Find the most recent push event in my activity
   const pushEvent = findPushEvent(rawResult);
 
-  // Get the number of commits in the pushEvent
-  const commitsInPush = pushEvent.payload.commits.length;
-
-  // The commitURL will be the URL property of the final commit object
-  const commitUrl = pushEvent.payload.commits[commitsInPush - 1].url;
-
-  // Make another API call to get the most recent commit object at the found commitURL
-  const commitObj = await getLastCommitObj(commitUrl);
+  // Get the most recent commit object from the payload
+  // TODO: payload.commits actually only includes the first 20 commits in the push, so this will
+  // not always actually be the most recent commit. This can be fixed using the commits API.
+  const commitObj = pushEvent.payload.commits[pushEvent.payload.commits.length - 1];
 
   // Render HTML which will be displayed: a truncated commit hash linking to the full commit
   return renderLastCommitHTML(commitObj);
