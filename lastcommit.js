@@ -15,19 +15,8 @@ const renderLastCommitHTML = (commit) => {
   return lastCommitHTML;
 };
 
-const findPushEvent = (activity) => {
-  let foundPush = false;
-  let i = 0;
-  let pushEvent = null;
-  while (foundPush === false && i < activity.length) {
-    if (activity[i].type === 'PushEvent') {
-      foundPush = true;
-      pushEvent = activity[i];
-    }
-    i += 1;
-  }
-  return pushEvent;
-};
+const findPushEvent = activity =>
+  activity.find(event => event.type === 'PushEvent');
 
 exports.lastCommit = async () => {
   // Get the raw API response for my events, which is in the data prop of the object axios returns
@@ -38,6 +27,9 @@ exports.lastCommit = async () => {
 
   // Find the most recent push event in my activity
   const pushEvent = findPushEvent(rawResult);
+  if (typeof pushEvent === 'undefined') {
+    return 'unavailable';
+  }
 
   // Get the most recent commit object from the payload
   // TODO: payload.commits actually only includes the first 20 commits in the push, so this will
