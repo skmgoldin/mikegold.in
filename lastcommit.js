@@ -8,7 +8,7 @@ const header = {
 
 const renderLastCommitHTML = (commit) => {
   const lastCommitSHA = `0x${commit.sha.slice(0, 8)}`;
-  const lastCommitURL = commit.html_url;
+  const lastCommitURL = commit.url;
   const lastCommitHTML = `<a href="${lastCommitURL}">${lastCommitSHA
   }</a>`;
 
